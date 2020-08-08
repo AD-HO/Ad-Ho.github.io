@@ -1,0 +1,1281 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TP1 Meta</title>
+    <script src="signalr.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="Chart.min.js"></script>
+    <script src="utils.js"></script>
+    <link rel="stylesheet" href="materialize.min.css">
+<title>Meta-SAT</title>
+    <!-- Compiled and minified JavaScript -->
+    <script src="materialize.min.js"></script>
+	<style>
+  body
+        {
+           
+          background-color: white;
+        }
+    
+         html
+         {
+          background-color: white;
+         }
+        
+         
+        #mynetwork {
+      width: 600px;
+      height: 500px;
+      border: 1px solid lightgray;
+    }
+	canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+</head>
+<body id="cp0" onbeforeunload="return myFunction()">
+    <script>
+        function myFunction() {
+            $.ajax({
+                url: '/Home/StopTask',
+                type: 'POST'
+            }).done(function (result) { });
+            event.preventDefault();
+            return "Write something clever here...";
+        }
+    </script>
+
+    <!-- Modal Structure -->
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Solution</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Litt</th>
+                        <th>Val</th>
+
+                    </tr>
+                </thead>
+
+                <tbody id="solaff">
+                    <tr>
+                        <td>Litt</td>
+                        <td>Val</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Exit</a>
+        </div>
+    </div>
+    <div id="modalimport" class="modal">
+        <div class="modal-content">
+            <h4>Import</h4>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a  href="#test22">Load</a></li>
+                        <li class="tab col s3"><a class="active" href="#test11">Open</a></li>
+
+                    </ul>
+                </div>
+                <div id="test11" class="col s12">
+                    <h1>Choose a file</h1>
+                    <div id="files" class="collection">
+                    </div>
+
+
+                </div>
+                <div id="test22" class="col s12">
+                    <div class="row">
+                        <div class="col s6">
+                            </div>
+                    <br />
+                    <br />
+                    <div class="col s6">
+                        <input type="file" style="display: none" />
+                        <a class="waves-effect waves-teal btn-flat blue-grey lighten-4 black-text  " style="width:100%;margin:0" id="btn2"><strong>Parcourir...</strong></a>
+                    </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red" onclick="fullscreen();">
+            Ecran
+        </a>
+
+    </div>
+    <ul class="tabs blue-grey">
+        <li class="tab col s3 "><a class="white-text" href="#Classic">Classic</a></li>
+
+        <li class="tab col s3 "><a class="white-text" href="#Genetique">Evolutionary</a></li>
+
+
+
+    </ul>
+    <div id="Genetique">
+
+        <nav>
+            <div class="nav-wrapper black" >
+                <a href="#" class="brand-logo">Evolutionary Approach</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+
+            </div>
+
+        </nav>
+        <div class="row">
+            <div class="col s3" >
+
+                <div class="col s12 ">
+                    <div class="card blue-grey darken-1">
+
+
+                        <ul id="tabspar" class="tabs transparent">
+                            <li class="tab col s6 "><a class="white-text" href="#Param">Parametres</a></li>
+                            <li class="tab col s6 "><a class="white-text" href="#Perfor">Performance</a></li>
+
+
+
+
+
+                        </ul>
+
+                        <div id="Param">
+                            <div class="card-content white-text">
+                                <div class="row">
+                                    <label class="col s6">
+                                        <input class="with-gap " id="genradio" onclick="ToGen()" name="group3" type="radio" checked />
+                                        <span>Genetique </span>
+                                    </label>
+
+                                    <label>
+                                        <input class="with-gap" id="psoradio" onclick="ToPSO()" name="group3" type="radio" />
+
+                                        <span>PSO</span>
+                                    </label>
+                                </div>
+                                <script>
+                                    function ToPSO() {
+
+                                        document.getElementById("genparam").style.display = "none";
+                                        document.getElementById("PSOParam").style.display = "";
+                                    }
+                                </script>
+                                <script>
+                                    function ToGen() {
+
+                                        document.getElementById("PSOParam").style.display = "none";
+                                        document.getElementById("genparam").style.display = "";
+                                    }
+                                </script>
+                                Population  <span id="valuerangepopulation">
+                                    0
+
+                                </span>
+                                <input type="range" step="10" value=0 id="populationrange" min="0" max="100" />
+
+
+                                <script>
+                                    var rangeSliderpop = document.getElementById("populationrange");
+                                    var rangevaluepop = document.getElementById("valuerangepopulation");
+                                    rangeSliderpop.addEventListener("input", showSliderValue, false);
+                                    function showSliderValue() {
+                                        rangevaluepop.innerHTML = rangeSliderpop.value;
+
+
+                                    }
+                                </script>
+                                <div id="genparam">
+                                    Crossing Rate
+                                    <span id="valuerangetc">
+                                        60
+                                    </span>
+                                    <input type="range" id="tcrange" value=60 min="0" max="100" />
+
+                                    <script>
+                                        var rangeSlidertc = document.getElementById("tcrange");
+                                        var rangevaluetc = document.getElementById("valuerangetc");
+                                        rangeSlidertc.addEventListener("input", showSliderValue, false);
+                                        function showSliderValue() {
+                                            rangevaluetc.innerHTML = rangeSlidertc.value;
+
+
+                                        }
+                                    </script>
+
+                                        Mutation Rate
+                                    <span id="valuerangetm">
+                                        40
+                                    </span>
+                                    <input type="range" id="tmrange" value=40 min="0" max="100" />
+
+
+
+
+                                    <script>
+                                        var rangeSlidertm = document.getElementById("tmrange");
+                                        var rangevaluetm = document.getElementById("valuerangetm");
+                                        rangeSlidertm.addEventListener("input", showSliderValue, false);
+                                        function showSliderValue() {
+                                            rangevaluetm.innerHTML = rangeSlidertm.value;
+
+
+                                        }
+                                    </script>
+                                </div>
+                                <div id="PSOParam" style="display: none">
+                                    W
+                                    <span id="valuerangeW">
+                                        0.2
+                                    </span>
+                                    <input type="range" id="Wrange" value=0.2 step="0.1" min="0" max="5" />
+
+                                    <script>
+                                        var rangeSliderW = document.getElementById("Wrange");
+                                        var rangevalueW = document.getElementById("valuerangeW");
+                                        rangeSliderW.addEventListener("input", showSliderValue, false);
+                                        function showSliderValue() {
+                                            rangevalueW.innerHTML = rangeSliderW.value;
+
+
+                                        }
+                                    </script>
+
+                                    C1
+                                    <span id="valuerangeC1">
+                                        0.4
+                                    </span>
+                                    <input type="range" id="C1range" value=0.4 step="0.1" min="0" max="2" />
+
+
+
+
+                                    <script>
+                                        var rangeSliderC1 = document.getElementById("C1range");
+                                        var rangevalueC1 = document.getElementById("valuerangeC1");
+                                        rangeSliderC1.addEventListener("input", showSliderValue, false);
+                                        function showSliderValue() {
+                                            rangevalueC1.innerHTML = rangeSliderC1.value;
+
+
+                                        }
+                                    </script>
+
+                                    C2
+                                    <span id="valuerangeC2">
+                                        0.3
+                                    </span>
+                                    <input type="range" id="C2range" value=0.3 step="0.1" min="0" max="2" "    />
+
+
+
+
+                                    <script>
+                                        var rangeSliderC2 = document.getElementById("C2range");
+                                        var rangevalueC2 = document.getElementById("valuerangeC2");
+                                        rangeSliderC2.addEventListener("input", showSliderValue, false);
+                                        function showSliderValue() {
+                                            rangevalueC2.innerHTML = rangeSliderC2.value;
+
+
+                                        }
+                                    </script>
+                                </div>
+                                Limited Time(min):
+                                <span id="valuerangetime">
+                                    1
+                                </span>
+                                <input type="range" id="rangetime" value=1 min="0" max="30" />
+
+                                <script>
+                                    var rangeSlidertime = document.getElementById("rangetime");
+                                    var rangevaluetime = document.getElementById("valuerangetime");
+                                    rangeSlidertime.addEventListener("input", showSliderValue, false);
+                                    function showSliderValue() {
+                                        rangevaluetime.innerHTML = rangeSlidertime.value;
+
+
+                                    }
+                                </script>
+                                MaxIter  <span id="valuerangemaxiter">
+                                    10000
+
+                                </span>
+                                <input type="range" step="10" value=10000 id="maxiterrange" min="10000" max="100000" />
+
+
+                                <script>
+                                    var rangeSlidermaxiter = document.getElementById("maxiterrange");
+                                    var rangevaluemaxiter = document.getElementById("valuerangemaxiter");
+                                    rangeSlidermaxiter.addEventListener("input", showSliderValue, false);
+                                    function showSliderValue() {
+                                        rangevaluemaxiter.innerHTML = rangeSlidermaxiter.value;
+
+
+                                    }
+                                </script>
+
+                            </div>
+                            <div class="card-action">
+                                <a class="modal-trigger" href="#modalimport" id="btn3">Import</a>
+                                <a href="#" id="btn4">Start</a>
+                            </div>
+                        </div>
+                        <div id="Perfor">
+                            <div class="card-content white-text">
+
+                                <p>Instance: <strong><span id="instancegen"></span></strong></p>
+
+
+                                <span class="card-title">Fitness : <span id="FitVal"></span> <span id="FitValMax"></span></span>
+
+
+
+                                <div class="progress">
+                                    <div class="determinate" id="ProgresFitness" style="background-color:red ;"></div>
+                                </div>
+                                <span class="card-title">
+                                    Execution time : <span id="GenTimeExec"></span>
+                                    <span id="GenTimeExecMax"></span>
+                                </span>
+
+                                <div class="progress">
+                                    <div class="determinate" id="ProgresTemps" style="background-color:red"></div>
+                                </div>
+                                <span class="card-title">
+                                    Iterations :<span id="IterGen"></span>
+                                    <span id="IterGenMax"></span>
+                                </span>
+
+
+                                <div class="progress">
+                                    <div class="determinate" id="ProgresIter" style="background-color:red"></div>
+                                </div>
+                                <br />
+                                <a class="waves-effect waves-teal btn-flat  blue-grey darken-4 center  white-text " style="width:100%;margin:0;" id="btnstop1">Stop</a>
+                                <br />
+                                <a class="waves-effect waves-teal btn-flat  blue-grey darken-4 center  white-text " style="width:100%;margin:0;" id="btnreset">Reset Graphs</a>
+
+
+                                <a class="waves-effect transparent waves-light btn modal-trigger" href="#modal1">Show Solution</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s9">
+                <div style="width:100%;">
+                    <canvas id="canvas3">
+                    </canvas>
+                </div>
+            </div>
+
+        </div><div id="loggGen" class="collection" style=" height:450px;                     overflow:auto;">
+
+
+        </div>
+    </div>
+    </div>
+
+    <div id="Classic">
+
+
+        <nav>
+            <div class="nav-wrapper black">
+                <a href="#" class="brand-logo">State space approach</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+
+                    <ul class="tabs transparent">
+                        <li class="tab col s3 "><a class="white-text" href="#test1">Graph</a></li>
+                        <li class="tab col s3 "><a class="white-text" href="#test2">Occurrences</a></li>
+
+                    </ul>
+
+
+
+
+                </ul>
+            </div>
+
+
+        </nav>
+
+        <div class="row" style="height: 100%">
+
+
+
+
+
+            <div class="col s3">
+                <br>
+                <div class="col s12">
+
+                    <div class="col s6">
+                        <h6>Blind</h6>
+                        <p>
+                            <label>
+                                <input name="group1" id="LargeurRadio" onclick="DFSDesc()" type="radio" />
+                                <span class="black-text"><strong>BFS</strong></span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="group1" id="ProfondeurRadio" onclick="BFSDesc()" type="radio" />
+                                <span class="black-text"><strong>DFS</strong></span>
+                            </label>
+                        </p>
+                    </div>
+                    <div class="col s6">
+                        <h6>Informed</h6>
+                        <p>
+                            <label>
+                                <input name="group1" id="AvareRadio" onclick="AvareDesc()" type="radio" />
+                                <span class="black-text"><strong>Avare</strong></span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="group1" id="AStareRadio" onclick="AStaredesc()" type="radio" checked />
+                                <span class="black-text"><strong>AStare</strong></span>
+                            </label>
+                        </p>
+                        <script>
+                            function DFSDesc() {
+                                document.getElementById("AStareDesc").style = "display:none";
+                                document.getElementById("AvareDesc").style = "display:none";
+                                document.getElementById("DFSDesc").style = "";
+                                document.getElementById("BFSDesc").style = "display:none";
+                            }
+                            function BFSDesc() {
+                                document.getElementById("AStareDesc").style = "display:none";
+                                document.getElementById("AvareDesc").style = "display:none";
+                                document.getElementById("DFSDesc").style = "display:none";
+                                document.getElementById("BFSDesc").style = "";
+                            }
+                            function AvareDesc() {
+                                document.getElementById("AStareDesc").style = "display:none";
+                                document.getElementById("AvareDesc").style = "";
+                                document.getElementById("DFSDesc").style = "display:none";
+                                document.getElementById("BFSDesc").style = "display:none";
+                            }
+                            function AStaredesc() {
+                                document.getElementById("AStareDesc").style = "";
+                                document.getElementById("AvareDesc").style = "display:none";
+                                document.getElementById("DFSDesc").style = "display:none";
+                                document.getElementById("BFSDesc").style = "display:none";
+                            }
+                        </script>
+                    </div>
+                    <div class="col s6">
+                        <a class="waves-effect waves-teal btn-flat blue-grey lighten-4 black-text  modal-trigger" href="#modalimport" style="width:100%;margin:0"><strong>Import</strong></a>
+
+                    </div>
+                    <div class="col s6">
+                        <a class="waves-effect waves-teal btn-flat  blue-grey darken-4  white-text " style="width:100%;margin:0" id="btn1">Start</a>
+                    </div>
+                </div>
+
+                <div class="col s12">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <p>Instance: <strong><span id="instance"></span></strong></p>
+
+                            <span class="card-title">Execution time :</span>
+                            <h4 id="tempsexec"></h4>
+                            <span class="card-title">Iterations :</span>
+                            <h4 id="iterexec"></h4>
+                            <a class="waves-effect transparent waves-light btn " style="width:100%;margin:0;" id="btnstop">Stop</a>
+                            <br />
+                            <br />
+                            <a class="waves-effect transparent waves-light btn " style="width:100%;margin:0;" id="btnreset2">Reset Graphs</a>
+                            <br />
+                            <br />
+                            <a class="waves-effect transparent waves-light btn modal-trigger" href="#modal1">Show Solution</a>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <input type="hidden" id="direction" value="LR">
+
+
+            <div class="col s9">
+
+
+                <div class="col s12">
+
+                    <div class="col s12">
+                        <div class="row">
+
+                            <div id="test1" class="col s12">
+                                <div style="width:100%;">
+                                    <canvas id="canvas2"></canvas>
+                                </div>
+                            </div>
+                            <div id="test2" class="col s12">
+                                <canvas id="canvas1"></canvas>
+
+                            </div>
+                           
+                         
+                           
+                        </div>
+
+                    </div>
+                    <table>
+                        <thead>
+
+
+                        </thead>
+
+                    </table><ul id="messages">
+                    </ul>
+                </div>
+            </div>
+          
+        </div>
+
+        <br>
+        <br>
+
+        <script type="text/javascript">
+            // create an array with nodes
+
+        </script>
+
+        <script>
+            stopit = false;
+            var color = Chart.helpers.color;
+            var barChartData = {
+                //labels: ['X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7','X8','X9','X10','X11','X12','X13','X14','X15','X16','X17','X18','X19','X20'],
+                labels: [],
+                datasets: [{
+                    label: "Occ +X",
+                    backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                    borderColor: window.chartColors.red,
+                    borderWidth: 1,
+                    data: [
+
+                    ]
+                }, {
+                    label: "Occ -X",
+                    backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                    borderColor: window.chartColors.blue,
+                    borderWidth: 1,
+                    data: [
+
+                    ]
+                }]
+
+            };
+            //  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            var config2 = {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Genetique',
+                        backgroundColor: window.chartColors.red,
+                        borderColor: window.chartColors.red,
+                        data: [
+                            {
+                                x: 0, y: 0
+                            }
+                        ],
+                        fill: false,
+
+                    }, {
+                        label: 'PSO',
+                        backgroundColor: window.chartColors.green,
+                        borderColor: window.chartColors.green,
+                        data: [
+                            {
+
+                            }
+                        ],
+                        fill: false,
+
+                    }]
+                },
+                options: {
+
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Fitness Function'
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: "Black",
+                            fontSize: 18
+                        }
+                    }
+                    ,
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            beginAtZero: true,
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Temps',
+                                fontColor: "Black",
+                                fontSize: 18
+                            },
+                            ticks: {
+                                min: 0,
+                                fontColor: "Black",
+                                fontSize: 12,
+
+                            },
+
+                        }],
+                        yAxes: [{
+                            beginAtZero: true,
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Best Fit',
+                                fontColor: "Black",
+                                fontSize: 18
+                            },
+                            ticks: {
+                                min: 0,
+                                fontColor: "Black",
+                                fontSize: 12,
+
+                            },
+
+                        }]
+                    }
+                }
+            };
+            var config = {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'BFS',
+                        backgroundColor: window.chartColors.red,
+                        borderColor: window.chartColors.red,
+                        data: [
+
+                        ],
+                        fill: false,
+                    }, {
+                        label: 'DFS',
+                        backgroundColor: window.chartColors.yellow,
+                        borderColor: window.chartColors.yellow,
+                        data: [
+
+                        ],
+                        fill: false,
+                    }, {
+                        label: 'Avare',
+                        fill: false,
+                        backgroundColor: window.chartColors.blue,
+                        borderColor: window.chartColors.blue,
+                        data: [
+
+                        ],
+                    }, {
+                        label: 'AStare',
+                        backgroundColor: window.chartColors.green,
+                        borderColor: window.chartColors.green,
+                        data: [
+
+                        ],
+                        fill: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Chart of algorithms'
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: "Black",
+                            fontSize: 18
+                        }
+                    }
+                    ,
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Time',
+                                fontColor: "Black",
+                                fontSize: 18
+                            },
+                            ticks: {
+                                fontColor: "Black",
+                                fontSize: 12,
+
+                            },
+
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Iterations',
+                                fontColor: "Black",
+                                fontSize: 18
+                            },
+                            ticks: {
+                                fontColor: "Black",
+                                fontSize: 12,
+
+                            },
+
+                        }]
+                    }
+                }
+            };
+
+            window.onload = function () {
+                var ctx = document.getElementById('canvas1').getContext('2d');
+                window.myBar = new Chart(ctx, {
+                    type: 'bar',
+                    data: barChartData,
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                fontColor: "Black",
+                                fontSize: 18
+                            }
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: true,
+                                ticks: {
+                                    fontColor: "Black",
+                                    fontSize: 12,
+                                    stepSize: 0.1,
+                                    beginAtZero: true
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Literals',
+                                    fontColor: "Black",
+                                    fontSize: 18
+                                }
+                            }],
+                            yAxes: [{
+                                display: true,
+                                ticks: {
+                                    fontColor: "Black",
+                                    fontSize: 12,
+                                    stepSize: 1,
+                                    beginAtZero: true
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Occurences',
+                                    fontColor: "Black",
+                                    fontSize: 18
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: "Occurrences of literals"
+                        }
+                    }
+                });
+                var ii = 0;
+
+
+
+                var ctx3 = document.getElementById('canvas3').getContext('2d');
+                window.myLine2 = new Chart(ctx3, config2);
+                window.myLine2.update();
+                var ctx2 = document.getElementById('canvas2').getContext('2d');
+                window.myLine = new Chart(ctx2, config);
+                window.myLine.update();
+
+            };
+
+
+        </script>
+
+
+
+
+
+        <script>
+            var fileName;
+            var fs = 0;
+            function fullscreen() {
+
+                var elem = document.getElementById("cp0");
+
+                /* View in fullscreen */
+                if (fs == 0) {
+                    if (elem.requestFullscreen) {
+                        elem.requestFullscreen();
+                    } else if (elem.mozRequestFullScreen) { /* Firefox */
+                        elem.mozRequestFullScreen();
+                    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                        elem.webkitRequestFullscreen();
+                    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                        elem.msRequestFullscreen();
+                    }
+                    fs = 1;
+                }
+                else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.mozCancelFullScreen) { /* Firefox */
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) { /* IE/Edge */
+                        document.msExitFullscreen();
+                    }
+                    fs = 0
+                }
+
+            }
+        </script>
+
+
+        <script>
+            var selectedfile;
+            $(function () {
+              
+                $('.tabs').tabs();
+                $('.modal').modal();
+                (async function () {
+                    idd = 0;
+                    from = 1;
+                    var edges
+                    var nodes;
+                    const connection = new signalR.HubConnectionBuilder()
+                        .withUrl("https://morraymeta-001-site1.ctempurl.com/HubBridge")
+                        .build();
+
+                    async function start() {
+                        try {
+                            await connection.start();
+                            console.log("connected");
+                        } catch (err) {
+                            console.log(err);
+                            setTimeout(() => start(), 5000);
+                        }
+                    };
+
+                    connection.onclose(async () => {
+                        await start();
+                    });
+
+                    selectedfile = function (e) {
+                        elements = document.getElementsByClassName("collection-item file active")
+                        for (let i = 0; i < elements.length; i++) {
+                            elements[i].className = "collection-item file";
+
+                        }
+                        e.className = "collection-item file active";
+                        barChartData.datasets[0].data = [];
+                        config.data.datasets[0].data = [{ x: 0, y: 0 }];
+
+                        config.data.datasets[1].data = [{ x: 0, y: 0 }];
+                        config.data.datasets[2].data = [{ x: 0, y: 0 }];
+                        config.data.datasets[3].data = [{ x: 0, y: 0 }];
+                        config.data.labels = [0];
+                        config2.data.labels = [0];
+                        config2.data.datasets[1].data = [{ x: 0, y: 0 }];
+                        config2.data.datasets[0].data = [{ x: 0, y: 0 }];
+                        window.myLine.update();
+                        window.myLine2.update();
+                        //alert(e.id);
+
+                        connection.invoke("ImportFile", e.id);
+                    }
+                    async function closescreen() {
+
+                    }
+                    connection.on("Getnbclauses", n => {
+                        // ////alert(n);
+
+                    });
+                    connection.on("GetFiles", f => {
+                        $('#files').append('<a href="#!" onclick="selectedfile(this)" id="'+f+'" class="collection-item">'+f+'</a>');
+
+                    });
+                    connection.on("SolAdd", (x, val) => {
+                        //////alert(x);
+                    });
+                    connection.on("SolEvol", (x, val) => {
+
+                        $("#solaff").append("<tr><td>X" + x + "</td><td>+" + val + "</td></tr>");
+
+                    });
+                    connection.on("ReceiveToast", (m) => {
+                        M.toast({ html: m, classes: 'rounded' });
+                    });
+                    connection.on("clearsolution", () => {
+                      /*  $("#xval").innerHTML = "<th>Val</th>";
+                        $("#xid").innerHTML = "<th>Litt</th>";*/
+                        $("#solaff").innerHTML = " <tr>< td > Litt</td ><td>Val</td></tr >";
+
+                    });
+                    connection.on("addnode", name => {
+                      
+
+                    });
+                    connection.on("AGParam", (time, maxiter, nbclauses) => {
+                        document.getElementById("GenTimeExecMax").innerHTML = "/" + time;
+                        document.getElementById("FitValMax").innerHTML = "/" + nbclauses;
+                        document.getElementById("IterGenMax").innerHTML = "/" + maxiter;
+                       //alert(maxiter);
+                    });
+                    connection.on("PerformanceBar", (t, bestfit, iter) => {
+                        //  ////alert("t"+(1000*t)+";bestift="+bestfit*40000+";iter="+iter);
+                        document.getElementById("ProgresFitness").style = "background-color:red;width:" + bestfit + "%";
+                        document.getElementById("ProgresTemps").style = "background-color:red;width:" + t + "%";
+                        document.getElementById("ProgresIter").style = "background-color:red;width:" + iter + "%";
+
+                    });
+                    connection.on("ReceiveSolution", (sol) => {
+                        //  ////alert("t"+(1000*t)+";bestift="+bestfit*40000+";iter="+iter);
+
+                    });
+                    connection.on("PerformanceAG", (t, bestfit, iter) => {
+                        ////alert(iter);
+                        document.getElementById("GenTimeExec").innerHTML = t;
+                        document.getElementById("FitVal").innerHTML = bestfit;
+                        document.getElementById("IterGen").innerHTML = iter;
+
+
+
+
+
+                    });
+
+                    connection.on("TimeGraphAG", (xx, yy) => {
+                        if (config2.data.datasets[0].data.indexOf(yy) == -1) {
+                            if (config2.data.labels.indexOf(xx) == -1) {
+
+                                config2.data.labels.push(xx);
+                                config2.data.labels.sort((a, b) => a - b);
+
+                                window.myLine2.update();
+                                config2.data.datasets[0].data.push({ x: xx, y: yy });
+                                window.myLine2.update();
+                            }
+                        }
+                    });
+                    connection.on("TimeGraphPSO", (xx, yy) => {
+                        // ////alert(xx+","+yy);
+
+
+                        config2.data.labels.push(xx);
+                        config2.data.labels.sort((a, b) => a - b);
+
+
+                        config2.data.datasets[1].data.push({ x: xx, y: yy });
+                        window.myLine2.update();
+
+                    });
+                    connection.on("TimeGraphBFS", (xx, yy) => {
+                        // ////alert("x:"+xx +" y: " + yy);
+                        if (config.data.labels.indexOf(xx) == -1) {
+                            config.data.labels.push(xx);
+                            config.data.labels.sort((a, b) => a - b);
+                        }
+
+                        config.data.datasets[0].data.push({ x: xx, y: yy });
+                        window.myLine.update();
+                    });
+                    connection.on("TimeGraphDFS", (xx, yy) => {
+                        //   ////alert("x:"+xx +" y: " + yy);
+                        if (config.data.labels.indexOf(xx) == -1) {
+                            config.data.labels.push(xx);
+                            config.data.labels.sort((a, b) => a - b);
+                        }
+
+
+                        config.data.datasets[1].data.push({ x: xx, y: yy });
+                        window.myLine.update();
+
+                    });
+                    connection.on("TimeGraphAvare", (xx, yy) => {
+                        if (config.data.labels.indexOf(xx) == -1) {
+                            config.data.labels.push(xx);
+                            config.data.labels.sort((a, b) => a - b);
+                        }
+
+
+
+                        config.data.datasets[2].data.push({ x: xx, y: yy });
+                        window.myLine.update();
+
+                    });
+                    connection.on("SetInstance", i => {
+                        ////alert(i);
+                        document.getElementById("instance").innerHTML = i;
+                        document.getElementById("instancegen").innerHTML = i;
+                    });
+                    connection.on("TimeGraphAStare", (xx, yy) => {
+
+                        ////alert("x:"+xx +" y: " + yy);
+                        if (config.data.labels.indexOf(xx) == -1) {
+                            config.data.labels.push(xx);
+                            config.data.labels.sort((a, b) => a - b);
+                        }
+
+
+
+                        config.data.datasets[3].data.push({ x: xx, y: yy });
+                        window.myLine.update();
+
+                    });
+
+                    async function addMessage() {
+                        document.getElementById("iterexec").innerHTML = 'ms';
+                        document.getElementById("tempsexec").innerHTML = '';
+
+                      
+
+
+                        // window.myBar.addData(randomScalingFactor(), index);
+
+
+                        var r = $("input[id='AStareRadio']:checked").val();
+                        if (r) {
+
+                            config.data.datasets[3].data = [];
+                            window.myLine.update();
+                            window.myLine2.update();
+
+                            
+
+
+                            
+                            config.data.datasets[3].data = [{ x: 0, y: 0 }];
+                            window.myLine.update();
+                            connection.invoke("AStare");
+                        }
+                        else {
+                            r = $("input[id='LargeurRadio']:checked").val();
+                            if (r) {
+                                //alert('largeur');
+
+                               
+                                config.data.datasets[0].data = [{ x: 0, y: 0 }];
+                                window.myLine.update();
+                                await connection.invoke("BFS");
+                            }
+                            else {
+                                r = $("input[id='ProfondeurRadio']:checked").val();
+
+
+                                if (r) {
+
+                                  
+                                    config.data.datasets[1].data = [{ x: 0, y: 0 }];
+                                    window.myLine.update();
+                                    await connection.invoke("DFS");
+                                }
+                                else {
+
+                                   
+                                    
+                                    config.data.datasets[2].data = [{ x: 0, y: 0 }];
+                                    window.myLine.update();
+                                    await connection.invoke("Avare");
+                                }
+                            }
+                        }
+
+
+                    }
+
+                    async function lanch() {
+                        $('#tabspar').tabs('select', 'Perfor');
+
+                        await connection.invoke("genitquepop", rangeSliderpop.value);
+                        await connection.invoke("genitquetime", rangeSlidertime.value);
+                        await connection.invoke("genitquemaxiter", rangeSlidermaxiter.value);
+                        if (document.getElementById("psoradio").checked == true) {
+                            config2.data.datasets[1].data = [{ x: 0, y: 0 }];
+                            window.myLine2.update();
+                            await connection.invoke("psoW", rangeSliderW.value);
+                            await connection.invoke("psoC1", rangeSliderC1.value);
+                            await connection.invoke("psoC2", rangeSliderC2.value);
+                            config2.data.datasets[1].data = [{ x: 0, y: 0 }];
+
+                            await connection.invoke("launchPSO");
+
+                        }
+                        else {
+
+                            await connection.invoke("genitquetc", rangeSlidertc.value);
+                            await connection.invoke("genitquetm", rangeSlidertm.value);
+
+                            config2.data.datasets[0].data = [{ x: 0, y: 0 }];
+                            window.myLine2.update();
+                            await connection.invoke("lanchAGentique");
+                        }
+
+                        //  await connection.invoke("lanchAGentique",rangeSliderpop.value,rangeSlidertc.value,rangeSlidertm.value,rangeSlidertime.value,rangevaluemaxiter.value);
+
+
+
+
+
+                    }
+
+                    async function stopexec() {
+
+                        stopit = true;
+                        $.ajax({
+                            url: '/Home/StopTask',
+                            type: 'POST'
+                        }).done(function (result) { });
+                        event.preventDefault();
+
+                    }
+                    async function resetexec() {
+
+                        stopexec();
+                        barChartData.datasets[0].data = [];
+                        config.data.datasets[0].data = [{ x: 0, y: 0 }];
+
+                        config.data.datasets[1].data = [{ x: 0, y: 0 }];
+                        config.data.datasets[2].data = [{ x: 0, y: 0 }];
+                        config.data.datasets[3].data = [{ x: 0, y: 0 }];
+                        config.data.labels = [0];
+                        config2.data.labels = [0];
+                        config2.data.datasets[1].data = [{ x: 0, y: 0 }];
+                        config2.data.datasets[0].data = [{ x: 0, y: 0 }];
+                        window.myLine.update();
+                        window.myLine2.update();
+
+                    }
+
+                    async function addFile() {
+
+                        $("input").trigger("click");
+
+                    }
+
+                    $('input[type="file"]').change(async function (e) {
+                        fileName = e.target.files[0].name;
+                        barChartData.datasets[0].data = [];
+                        config.data.datasets[0].data = [{ x: 0, y: 0 }];
+
+                        config.data.datasets[1].data = [{ x: 0, y: 0 }];
+                        config.data.datasets[2].data = [{ x: 0, y: 0 }];
+                        config.data.datasets[3].data = [{ x: 0, y: 0 }];
+                        config.data.labels = [0];
+                        config2.data.labels = [0];
+                        config2.data.datasets[1].data = [{ x: 0, y: 0 }];
+                        config2.data.datasets[0].data = [{ x: 0, y: 0 }];
+                        window.myLine.update();
+                        window.myLine2.update();
+                        var fr = new FileReader();
+                        fr.onload = function () {
+
+                            connection.invoke("AddFile", fr.result);
+                        }
+
+                        fr.readAsText(this.files[0]); 
+                        //await connection.invoke("AddFile", fileName);
+                        //////alert('The file "' + fileName +  '" has been selected.');
+                    });
+                    var button1 = document.getElementById("btn1");
+                    button1.addEventListener('click', addMessage);
+
+                    var buttonstop = document.getElementById("btnstop");
+                    buttonstop.addEventListener('click', stopexec);
+                    var buttonstop1 = document.getElementById("btnstop1");
+                    buttonstop1.addEventListener('click', stopexec);
+                    var buttonreset = document.getElementById("btnreset");
+                    var buttonreset2 = document.getElementById("btnreset2");
+                    buttonreset.addEventListener('click', resetexec);
+                    buttonreset2.addEventListener('click', resetexec);
+
+                    var button2 = document.getElementById("btn2");
+                    button2.addEventListener('click', addFile);
+
+                    /*
+                    var button3 = document.getElementById("btn3");
+                    button3.addEventListener('click', addFile);*/
+
+                    var button4 = document.getElementById("btn4");
+                    button4.addEventListener('click', lanch);
+                    connection.on("ReceiveCoord", (litt, x, y) => {
+                        barChartData.labels.push('X' + litt);
+                        barChartData.datasets[0].data.push(x);
+
+                        barChartData.datasets[1].data.push(y);
+
+                        window.myBar.update();
+                    });
+                    connection.on("Time", t => {
+                        ////alert(t);
+                        document.getElementById("tempsexec").innerHTML = t + "ms";
+                    });
+                    connection.on("Iter", t => {
+
+                        document.getElementById("iterexec").innerHTML = t;
+                    });
+                    connection.on("ReceiveMessage", message => {
+
+                    });
+
+                    connection.start();
+
+                    //  ////alert("Connected");
+
+                })();
+            });
+
+        </script>
+    </div>
+</body>
+</html>
