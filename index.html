@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title>ADHO</title>
+</head>
+<body>
+  <div id="app" >
+    <v-app >
+      <v-content         
+      >
+        <v-toolbar
+      dark
+      
+      src="BackgroundR.png"
+    >
+
+      <v-toolbar-title href="#">        <v-icon >mdi-github</v-icon>        Ad-Ho </v-toolbar-title>
+
+      <v-row>
+       
+        
+        <v-tabs
+        v-model="tab"
+        background-color="transparent"
+        centered
+        icons
+      >
+      
+     
+      <v-tab
+          v-for="item in items"
+          :key="item.tab"
+          href="#"
+          link>
+        
+        <v-icon>{{item.icon}}</v-icon>
+      
+      </v-tab>
+      
+
+        </v-tabs>
+      
+        
+      </v-row>
+
+      <v-btn icon
+      @click.stop="drawer = !drawer"
+      >
+        <v-icon >mdi-account-group</v-icon>
+      </v-btn>
+    </v-toolbar>
+ 
+  
+
+    <v-tabs-items v-model="tab">
+       
+
+           <!--AAAAAAAAAAAAAAAAAAAAA-->
+ <v-tab-item
+       
+      >
+     
+    <v-parallax
+      dark
+      src="https://cdn.hipwallpaper.com/i/31/63/QKNE38.jpg">
+      <v-row
+align="center"
+      >
+      <v-col class="text-center white--text"  cols="12">
+        <h1 class="display-1 font-weight-thin mb-4">Adli Houssem</h1>
+
+        <v-btn text large color="white"           :class="`elevation-${hover ? 24 : 6}`"        >RESUME PDF</v-btn>
+
+      </v-col>
+      </v-row>
+      <v-row
+align="center"
+      >
+      <v-col class="text-left white-text"  cols="6">
+        <h1 class="display-1 font-weight-thin mb-4">App Development</h1>
+        <h4 class="subheading">Desktop</h4>
+        <h4 class="subheading">Web</h4>
+        <h4 class="subheading">Mobile</h4>
+
+      </v-col>
+      
+        <v-col class="text-left white--text"  cols="6">
+          <h1 class="display-1 font-weight-thin mb-4">AI Engineering</h1>
+          <h4 class="subheading">Deep Learning</h4>
+          <h4 class="subheading">Computer Vision</h4>
+          <h4 class="subheading">Natural Language Processing</h4>
+
+        </v-col>
+      </v-row>
+    </v-parallax>
+     <v-row
+
+      >
+      <v-col   cols="1"></v-col>
+      <v-col   cols="10">
+        <v-row
+
+        >
+      <v-col class="text-center black--text"  cols="12">
+        <h1 class="display-1 font-weight-thin mb-4">AI Projects</h1>
+
+
+      </v-col>
+      <v-col class="text-left black--text"  cols="4">
+        <v-card
+        class="mx-auto"
+        max-width="400"
+      >
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://storage.googleapis.com/dev-dot-ai-project-ic.appspot.com/1/2020/05/960x0.jpg">
+          <v-card-title>SAT Problem</v-card-title>
+        </v-img>
+    
+    
+        <v-card-text class="text--primary">
+    
+          <div>Blind & Informed Search, Meta-Heuristics</div>
+        </v-card-text>
+    
+        <v-card-actions>
+          <v-btn
+            color="orange"
+            text
+          >
+            Github
+          </v-btn>
+          <v-btn
+          color="orange"
+          text
+        >
+          Explore
+        </v-btn>
+          <v-btn
+            color="orange"
+            text
+          >
+            Demo
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-col>
+      
+      <v-col class="text-center black--text"  cols="4">
+        <v-card
+        class="mx-auto"
+        max-width="400"
+      >
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://www.lebigdata.fr/wp-content/uploads/2019/06/computer-vision-definition-660x330.jpg"
+        >
+          <v-card-title>Ring Game</v-card-title>
+        </v-img>
+    
+    
+        <v-card-text class="text--primary">
+    
+          <div>Computer Vision, OpenCV, Object Detection</div>
+        </v-card-text>
+    
+        <v-card-actions>
+          <v-btn
+            color="orange"
+            text
+          >
+            Github
+          </v-btn>
+          <v-btn
+          color="orange"
+          text
+        >
+          Explore
+        </v-btn>
+    
+          <v-btn
+            color="orange"
+            text
+          >
+            Demo
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-col>
+      <v-col class="text-right black--text"  cols="4">
+        <v-card
+        class="mx-auto"
+        max-width="400"
+      >
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+        >
+          <v-card-title>Information Retrieval</v-card-title>
+        </v-img>
+    
+    
+        <v-card-text class="text--primary">
+    
+          <div>Text Mining,Boolean Search, Vectoriel Search</div>
+        </v-card-text>
+    
+        <v-card-actions>
+          <v-btn
+            color="orange"
+            text
+          >
+            Github
+          </v-btn>
+          <v-btn
+          color="orange"
+          text
+        >
+          Explore
+        </v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-col>
+      <v-col class="text-left black--text"  cols="4">
+        <v-card
+        class="mx-auto"
+        max-width="400"
+      >
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://www.analyticsinsight.net/wp-content/uploads/2020/03/0_4x5HPrOlbSE0kXzz.jpg">
+          <v-card-title>Arabic POS-TAGGER</v-card-title>
+        </v-img>
+    
+    
+        <v-card-text class="text--primary">
+    
+          <div>HMM POS-Tagging, NLTK</div>
+        </v-card-text>
+    
+        <v-card-actions>
+          <v-btn
+            color="orange"
+            text
+          >
+            Github
+          </v-btn>
+          <v-btn
+          color="orange"
+          text
+        >
+          Explore
+        </v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-col>
+      <v-col class="text-center black--text"  cols="4">
+        <v-card
+        class="mx-auto"
+        max-width="400"
+      >
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://www.groupe-infoclip.com/sites/default/files/bigdata.jpg"
+        >
+          <v-card-title>Mining Dataset</v-card-title>
+        </v-img>
+    
+    
+        <v-card-text class="text--primary">
+    
+          <div>Data Visualization, Clustring</div>
+        </v-card-text>
+    
+        <v-card-actions>
+          <v-btn
+            color="orange"
+            text
+          >
+            Github
+          </v-btn>
+          <v-btn
+          color="orange"
+          text
+        >
+          Explore
+        </v-btn>
+          <v-btn
+            color="orange"
+            text
+          >
+            Demo
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-col>
+      <v-col class="text-right black--text"  cols="4">
+        <v-card
+        class="mx-auto"
+        max-width="400"
+      >
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://www.lebigdata.fr/wp-content/uploads/2019/06/computer-vision-definition-660x330.jpg"
+        >
+          <v-card-title>Object Recognition</v-card-title>
+        </v-img>
+    
+    
+        <v-card-text class="text--primary">
+    
+          <div>YOLO,Object Detection,Object Recognition</div>
+        </v-card-text>
+    
+        <v-card-actions>
+          <v-btn
+            color="orange"
+            text
+          >
+            Github
+          </v-btn>
+          <v-btn
+          color="orange"
+          text
+        >
+          Explore
+        </v-btn>
+        <v-btn
+        color="orange"
+        text
+      >
+        Demo
+      </v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-col>
+        </v-row>
+      </v-col>
+      </v-row>
+   
+    
+      <v-row
+
+      >
+      <v-col   cols="1"></v-col>
+      <v-col   cols="10">
+        <v-row
+
+        >
+      <v-col class="text-center black--text"  cols="12">
+        <h1 class="display-1 font-weight-thin mb-4">Programming Projects</h1>
+      </v-col>
+      <v-col class="text-left black--text"  cols="4">
+        <v-card
+        class="mx-auto"
+        max-width="400"
+      >
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://logopond.com/logos/628f0b89eae1f019afbb328a504249da.png">
+          <v-card-title>Room</v-card-title>
+        </v-img>
+    
+    
+        <v-card-text class="text--primary">
+    
+          <div>Open Private Room & Invite Your Friends !</div>
+        </v-card-text>
+    
+        <v-card-actions>
+          <v-btn
+          color="orange"
+          text
+        >
+          Explore
+        </v-btn>
+          <v-btn
+          color="orange"
+          text
+        >
+          Demo
+        </v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-col>
+      <v-col class="text-center black--text"  cols="4">
+        <v-card
+        class="mx-auto"
+        max-width="400"
+      >
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://documents.trendmicro.com/images/TEx/articles/free-encryption.jpg"
+        >
+          <v-card-title>Caesar Cipher</v-card-title>
+        </v-img>
+    
+    
+        <v-card-text class="text--primary">
+    
+          <div>Encode and Decode Messages</div>
+        </v-card-text>
+    
+        <v-card-actions>
+          <v-btn
+            color="orange"
+            text
+          >
+            Github
+          </v-btn>
+          <v-btn
+          color="orange"
+          text
+        >
+          Explore
+        </v-btn>
+    
+          <v-btn
+            color="orange"
+            text
+          >
+            Demo
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-col>
+      <v-col class="text-right black--text"  cols="4">
+        <v-card
+        class="mx-auto"
+        max-width="400"
+      >
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://f.hubspotusercontent30.net/hubfs/403737/share%20story!.jpg"
+        >
+          <v-card-title>Together</v-card-title>
+        </v-img>
+    
+    
+        <v-card-text class="text--primary">
+    
+          <div>Pin your Story to The World ! </div>
+        </v-card-text>
+    
+        <v-card-actions>
+          <v-btn
+            color="orange"
+            text
+          >
+            Explore
+          </v-btn>
+          <v-btn
+          color="orange"
+          text
+        >
+          Demo
+        </v-btn>
+        
+        </v-card-actions>
+      </v-card>
+      </v-col>
+        </v-row>
+
+      </v-tab-item>
+
+
+           <!--AAAAAAAAAAAAAAAA-->
+
+       <v-tab-item
+       
+       >
+          <v-parallax
+          dark
+          src="BackgroundR.png"
+          >
+           <v-row
+            align="center"
+            justify="center"
+          >
+          <v-timeline>
+           
+            <v-timeline-item
+              
+              color="brown"
+              small
+            >
+              <template v-slot:opposite>
+                July,  <span
+                  class="`headline font-weight-bold blue--text`"
+                  v-text="2018"
+                ></span>
+              </template>
+              <div class="py-4">
+                <h2 class="`headline font-weight-light mb-4 blue--text`">Bachelor, Information Systems and Software Engineering </h2>
+                <div>
+                  University of Science and Technology Houari Boumediene, Algiers, Algeria
+                  <br>
+            <strong> Fields of research </strong>: Software engineering, Database management
+                <br>
+                <strong>  Grade : A+ </strong>
+                  
+                </div>
+              </div>
+            </v-timeline-item>
+            <v-timeline-item
+              
+              color="red"
+              small
+            >
+              <template v-slot:opposite>
+               July, <span
+                  class="`headline font-weight-bold blue--text`"
+                  v-text="2020"
+                ></span>
+              </template>
+              <div class="py-4">
+                <h2 class="`headline font-weight-light mb-4 blue--text`">Master,                   Intelligent IT Systems
+          </h2>
+                <div>
+                  University of Science and Technology Houari Boumediene, Algiers, Algeria
+                  <br>
+            <strong> Fields of research </strong>: Machine Learning, Data Mining, Computer Vision
+                <br>
+                <strong>  Grade : A+ </strong>
+                  
+                </div>
+              </div>
+            </v-timeline-item>
+          </v-timeline>
+        </v-parallax>
+        <v-row
+
+      >
+      <v-col   cols="1"></v-col>
+      <v-col   cols="10">
+        <v-row
+
+        >
+      <v-col class="text-center black--text"  cols="12">
+        <h1 class="display-1 font-weight-thin mb-4">Skills</h1>
+      </v-col>
+       </v-tab-item>
+
+            <!--AAAAAAAAAAAAAAAA-->
+
+      <v-tab-item
+       
+      >
+        <v-card flat>
+          <v-card-text>cccc</v-card-text>
+        </v-card>
+      </v-tab-item>
+
+
+            <!--DDDDDDDDD-->
+
+      <v-tab-item
+       
+      >
+        <v-card flat>
+          <v-card-text>dddddd</v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+      </v-content>
+          
+  
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+       data () {
+
+        
+            return {
+              tab: null,
+
+              items: [
+          { tab: 'One', content: 'Tab 1 Content', icon: 'mdi-home' },
+          { tab: 'Two', content: 'Tab 2 Content', icon: 'mdi-school' },
+          { tab: 'Three', content: 'Tab 3 Content', icon: 'mdi-account' },
+
+        ],years: [
+        
+        {
+          color: 'purple darken-4',
+          year: 'July, 2018',
+          text:'h1eeeekokegopkeopkgeeefefekopoejopfejgejpoejge'
+        },
+        {
+          color: 'brown darken-4',
+          year: 'July, 2020',
+          text:'h2222eeee'
+
+        },
+      ],
+              items2: [        ['mdi-home','h'],
+        ['mdi-email', 'Inbox'],
+        ['mdi-account-supervisor-circle', 'Supervisors'],
+        ['mdi-clock-start', 'Clock-in'],
+            ]
+            }
+          }
+    })
+  </script>
+</body>
+</html>
