@@ -947,53 +947,53 @@
                     async function closescreen() {
 
                     }
-                    connection.on("Getnbclauses", n => {
+                    connection.on("Getnbclauses", async n => {
                         // ////alert(n);
 
                     });
-                    connection.on("GetFiles", f => {
+                    connection.on("GetFiles", async f => {
                         $('#files').append('<a href="#!" onclick="selectedfile(this)" id="'+f+'" class="collection-item">'+f+'</a>');
 
                     });
-                    connection.on("SolAdd", (x, val) => {
+                    connection.on("SolAdd", async (x, val) => {
                         //////alert(x);
                     });
-                    connection.on("SolEvol", (x, val) => {
+                    connection.on("SolEvol", async (x, val) => {
 
                         $("#solaff").append("<tr><td>X" + x + "</td><td>+" + val + "</td></tr>");
 
                     });
-                    connection.on("ReceiveToast", (m) => {
+                    connection.on("ReceiveToast", async (m) => {
                         M.toast({ html: m, classes: 'rounded' });
                     });
-                    connection.on("clearsolution", () => {
+                    connection.on("clearsolution", async () => {
                       /*  $("#xval").innerHTML = "<th>Val</th>";
                         $("#xid").innerHTML = "<th>Litt</th>";*/
                         $("#solaff").innerHTML = " <tr>< td > Litt</td ><td>Val</td></tr >";
 
                     });
-                    connection.on("addnode", name => {
+                    connection.on("addnode", async name => {
                       
 
                     });
-                    connection.on("AGParam", (time, maxiter, nbclauses) => {
+                    connection.on("AGParam", async (time, maxiter, nbclauses) => {
                         document.getElementById("GenTimeExecMax").innerHTML = "/" + time;
                         document.getElementById("FitValMax").innerHTML = "/" + nbclauses;
                         document.getElementById("IterGenMax").innerHTML = "/" + maxiter;
                        //alert(maxiter);
                     });
-                    connection.on("PerformanceBar", (t, bestfit, iter) => {
+                    connection.on("PerformanceBar", async (t, bestfit, iter) => {
                         //  ////alert("t"+(1000*t)+";bestift="+bestfit*40000+";iter="+iter);
                         document.getElementById("ProgresFitness").style = "background-color:red;width:" + bestfit + "%";
                         document.getElementById("ProgresTemps").style = "background-color:red;width:" + t + "%";
                         document.getElementById("ProgresIter").style = "background-color:red;width:" + iter + "%";
 
                     });
-                    connection.on("ReceiveSolution", (sol) => {
+                    connection.on("ReceiveSolution", async (sol) => {
                         //  ////alert("t"+(1000*t)+";bestift="+bestfit*40000+";iter="+iter);
 
                     });
-                    connection.on("PerformanceAG", (t, bestfit, iter) => {
+                    connection.on("PerformanceAG", async (t, bestfit, iter) => {
                         ////alert(iter);
                         document.getElementById("GenTimeExec").innerHTML = t;
                         document.getElementById("FitVal").innerHTML = bestfit;
@@ -1005,7 +1005,7 @@
 
                     });
 
-                    connection.on("TimeGraphAG", (xx, yy) => {
+                    connection.on("TimeGraphAG", async (xx, yy) => {
                         if (config2.data.datasets[0].data.indexOf(yy) == -1) {
                             if (config2.data.labels.indexOf(xx) == -1) {
 
@@ -1018,7 +1018,7 @@
                             }
                         }
                     });
-                    connection.on("TimeGraphPSO", (xx, yy) => {
+                    connection.on("TimeGraphPSO", async (xx, yy) => {
                         // ////alert(xx+","+yy);
 
 
@@ -1030,7 +1030,7 @@
                         window.myLine2.update();
 
                     });
-                    connection.on("TimeGraphBFS", (xx, yy) => {
+                    connection.on("TimeGraphBFS", async  (xx, yy) => {
                         // ////alert("x:"+xx +" y: " + yy);
                         if (config.data.labels.indexOf(xx) == -1) {
                             config.data.labels.push(xx);
@@ -1040,7 +1040,7 @@
                         config.data.datasets[0].data.push({ x: xx, y: yy });
                         window.myLine.update();
                     });
-                    connection.on("TimeGraphDFS", (xx, yy) => {
+                    connection.on("TimeGraphDFS",async  (xx, yy) => {
                         //   ////alert("x:"+xx +" y: " + yy);
                         if (config.data.labels.indexOf(xx) == -1) {
                             config.data.labels.push(xx);
@@ -1052,7 +1052,7 @@
                         window.myLine.update();
 
                     });
-                    connection.on("TimeGraphAvare", (xx, yy) => {
+                    connection.on("TimeGraphAvare", async (xx, yy) => {
                         if (config.data.labels.indexOf(xx) == -1) {
                             config.data.labels.push(xx);
                             config.data.labels.sort((a, b) => a - b);
@@ -1064,12 +1064,12 @@
                         window.myLine.update();
 
                     });
-                    connection.on("SetInstance", i => {
+                    connection.on("SetInstance", async i => {
                         ////alert(i);
                         document.getElementById("instance").innerHTML = i;
                         document.getElementById("instancegen").innerHTML = i;
                     });
-                    connection.on("TimeGraphAStare", (xx, yy) => {
+                    connection.on("TimeGraphAStare", async (xx, yy) => {
 
                         ////alert("x:"+xx +" y: " + yy);
                         if (config.data.labels.indexOf(xx) == -1) {
@@ -1154,8 +1154,6 @@ else
 
                         if(!init)
 alert('No File Loaded or Corrupted File');
-                        if($('input[type="file"]').val().get(0).files.length === 0)
-alert('No File Loaded');
                         else
                         {
                         $('#tabspar').tabs('select', 'Perfor');
@@ -1276,7 +1274,7 @@ alert('No File Loaded');
 
                     var button4 = document.getElementById("btn4");
                     button4.addEventListener('click', lanch);
-                    connection.on("ReceiveCoord", (litt, x, y) => {
+                    connection.on("ReceiveCoord", async (litt, x, y) => {
                         barChartData.labels.push('X' + litt);
                         barChartData.datasets[0].data.push(x);
 
@@ -1286,15 +1284,15 @@ alert('No File Loaded');
                         if(init==false)
                         init=true
                     });
-                    connection.on("Time", t => {
+                    connection.on("Time", async t => {
                         ////alert(t);
                         document.getElementById("tempsexec").innerHTML = t + "ms";
                     });
-                    connection.on("Iter", t => {
+                    connection.on("Iter", async t => {
 
                         document.getElementById("iterexec").innerHTML = t;
                     });
-                    connection.on("ReceiveMessage", message => {
+                    connection.on("ReceiveMessage", async message => {
 
                     });
 
