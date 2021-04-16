@@ -1143,6 +1143,10 @@
                     }
 
                     async function lanch() {
+                        if($('input[type="file"]').val()==null)
+alert('No File Loaded');
+                        else
+                        {
                         $('#tabspar').tabs('select', 'Perfor');
 
                         await connection.invoke("genitquepop", rangeSliderpop.value);
@@ -1168,6 +1172,7 @@
                             window.myLine2.update();
                             await connection.invoke("lanchAGentique");
                         }
+                    }
 
                         //  await connection.invoke("lanchAGentique",rangeSliderpop.value,rangeSlidertc.value,rangeSlidertm.value,rangeSlidertime.value,rangevaluemaxiter.value);
 
