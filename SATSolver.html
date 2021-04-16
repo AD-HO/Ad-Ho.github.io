@@ -1143,7 +1143,8 @@
                     }
 
                     async function lanch() {
-                        if($('input[type="file"]').val()==null)
+                        alert('hiha')
+                        if($('input[type="file"]').val().get(0).files.length === 0)
 alert('No File Loaded');
                         else
                         {
