@@ -888,7 +888,7 @@
                     var edges
                     var nodes;
                     const connection = new signalR.HubConnectionBuilder()
-                        .withUrl("http://localhost:5000/HubBridge")
+                        .withUrl("http://serverside-001-site1.gtempurl.com/HubBridge")
                         .configureLogging(signalR.LogLevel.Information)
                         .build();
 
@@ -1186,7 +1186,7 @@ alert('No File Loaded or Corrupted File');
 
                         stopit = true;
                         $.ajax({
-                            url: 'http://localhost:5000/Home/StopTask?id='+localStorage.getItem('ConnectionId'),
+                            url: 'http://serverside-001-site1.gtempurl.com/Home/StopTask?id='+localStorage.getItem('ConnectionId'),
                             type: 'POST'
                         }).done(function (result) { });
                         event.preventDefault();
