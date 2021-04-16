@@ -1,11 +1,10 @@
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/HubBridge")
+    .withUrl("http://objdetect-001-site1.gtempurl.com/HubBridge")
     .build();
 
 async function start() {
     try {
         await connection.start();
-        console.log("connected");
     } catch (err) {
         console.log(err);
         setTimeout(() => start(), 5000);
