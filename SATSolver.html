@@ -1288,6 +1288,8 @@ alert('No File Loaded or Corrupted File');
                     });
 connection.on("GetMyConnectionId",async connectionid=>{
     localStorage.setItem("ConnectionId", connectionid);
+    connection.invoke("ImportFile","uf50-01");
+                        
 
 })
                     connection.start().then(async ()=>{
