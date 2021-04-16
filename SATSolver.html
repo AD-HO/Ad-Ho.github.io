@@ -2,12 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>MSAT Solver</title>
+    <title>SAT Solver</title>
     <script src="signalr.min.js"></script>
     <script src="jquery.min.js"></script>
     <script src="Chart.min.js"></script>
     <script src="utils.js"></script>
     <link rel="stylesheet" href="materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <title>Meta-SAT</title>
     <!-- Compiled and minified JavaScript -->
     <script src="materialize.min.js"></script>
@@ -76,20 +78,20 @@
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Exit</a>
         </div>
     </div>
-    <div id="modalimport" class="modal">
-        <div class="modal-content">
-            <h4>Import</h4>
+    <div id="modalimport" class="modal" style="overflow-y: hidden;">
+        <div class="modal-content" style="overflow-y: hidden;">
+            <h4>Choose a file</h4>
             <div class="row">
                 <div class="col s12">
                     <ul class="tabs">
-                        <li class="tab col s3"><a  href="#test22">Load</a></li>
                         <li class="tab col s3"><a class="active" href="#test11">Open</a></li>
+
+                        <li class="tab col s3"><a  href="#test22">Load</a></li>
 
                     </ul>
                 </div>
-                <div id="test11" class="col s12">
-                    <h1>Choose a file</h1>
-                    <div id="files" class="collection">
+                <div id="test11" class="col s12" style="overflow-y: hidden; margin-bottom: -60px;">
+                    <div style="height: 220px; overflow: scroll; overflow-x: hidden;" id="files" class="collection">
                     </div>
 
 
@@ -102,19 +104,19 @@
                     <br />
                     <div class="col s6">
                         <input type="file" style="display: none" />
-                        <a class="waves-effect waves-teal btn-flat blue-grey lighten-4 black-text  " style="width:100%;margin:0" id="btn2"><strong>Parcourir...</strong></a>
+                        <a class="waves-effect waves-teal btn-flat blue-grey lighten-4 black-text  " style="width:100%;margin:0" id="btn2"><strong>Import...</strong></a>
                     </div>
                         </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Import</a>
         </div>
     </div>
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red" onclick="fullscreen();">
-            Ecran
+        <a class="btn-floating btn-flat red" onclick="fullscreen();">
+            <i class="large material-icons">fullscreen</i>
         </a>
 
     </div>
@@ -758,7 +760,7 @@
                             display: true,
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Iterations',
+                                labelString: 'Best Fit',
                                 fontColor: "Black",
                                 fontSize: 18
                             },
@@ -894,7 +896,7 @@
                     var edges
                     var nodes;
                     const connection = new signalR.HubConnectionBuilder()
-                        .withUrl("/HubBridge")
+                        .withUrl("http://serverside-001-site1.gtempurl.com/Meta/HubBridge")
                         .build();
 
                     async function start() {
@@ -919,6 +921,9 @@
                         }
                         e.className = "collection-item file active";
                         barChartData.datasets[0].data = [];
+                        barChartData.datasets[1].data = [];
+                        barChartData.labels = [0];
+
                         config.data.datasets[0].data = [{ x: 0, y: 0 }];
 
                         config.data.datasets[1].data = [{ x: 0, y: 0 }];
@@ -928,6 +933,8 @@
                         config2.data.labels = [0];
                         config2.data.datasets[1].data = [{ x: 0, y: 0 }];
                         config2.data.datasets[0].data = [{ x: 0, y: 0 }];
+                        window.myBar.update();
+
                         window.myLine.update();
                         window.myLine2.update();
                         //alert(e.id);
@@ -1192,6 +1199,8 @@
                         config2.data.labels = [0];
                         config2.data.datasets[1].data = [{ x: 0, y: 0 }];
                         config2.data.datasets[0].data = [{ x: 0, y: 0 }];
+                        window.myBar.update();
+
                         window.myLine.update();
                         window.myLine2.update();
 
@@ -1215,6 +1224,8 @@
                         config2.data.labels = [0];
                         config2.data.datasets[1].data = [{ x: 0, y: 0 }];
                         config2.data.datasets[0].data = [{ x: 0, y: 0 }];
+                        window.myBar.update();
+
                         window.myLine.update();
                         window.myLine2.update();
                         var fr = new FileReader();
