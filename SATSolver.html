@@ -896,7 +896,8 @@
                     var edges
                     var nodes;
                     const connection = new signalR.HubConnectionBuilder()
-                        .withUrl("http://serverside-001-site1.gtempurl.com/Meta/HubBridge")
+                        .withUrl("http://serverside-001-site1.gtempurl.com/HubBridge")
+                        .configureLogging(signalR.LogLevel.Information)
                         .build();
 
                     async function start() {
