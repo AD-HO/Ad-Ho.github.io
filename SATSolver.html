@@ -482,7 +482,7 @@
                               /*  document.getElementById("AStareDesc").style = "";
                                 document.getElementById("AvareDesc").style = "display:none";
                                 document.getElementById("DFSDesc").style = "display:none";
-                                document.getElementById("BFSDesc").style = "display:none";*/
+                                document.getElementById("BFSDesc").style     = "display:none";*/
                             }
                         </script>
                     </div>
@@ -1195,7 +1195,7 @@ alert('No File Loaded or Corrupted File');
 
                         stopit = true;
                         $.ajax({
-                            url: '/Home/StopTask',
+                            url: 'http://serverside-001-site1.gtempurl.com/Home/StopTask',
                             type: 'POST'
                         }).done(function (result) { });
                         event.preventDefault();
