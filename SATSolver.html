@@ -39,16 +39,7 @@
 	</style>
 </head>
 <body id="cp0" onbeforeunload="return myFunction()">
-    <script>
-        function myFunction() {
-            $.ajax({
-                url: '/Home/StopTask',
-                type: 'POST'
-            }).done(function (result) { });
-            event.preventDefault();
-            return "Write something clever here...";
-        }
-    </script>
+   
 
     <!-- Modal Structure -->
     <!-- Modal Structure -->
@@ -897,7 +888,7 @@
                     var edges
                     var nodes;
                     const connection = new signalR.HubConnectionBuilder()
-                        .withUrl("http://serverside-001-site1.gtempurl.com/HubBridge")
+                        .withUrl("http://localhost:5000/HubBridge")
                         .configureLogging(signalR.LogLevel.Information)
                         .build();
 
@@ -1195,7 +1186,7 @@ alert('No File Loaded or Corrupted File');
 
                         stopit = true;
                         $.ajax({
-                            url: 'http://serverside-001-site1.gtempurl.com/Home/StopTask',
+                            url: 'http://localhost:5000/Home/StopTask?id='+localStorage.getItem('ConnectionId'),
                             type: 'POST'
                         }).done(function (result) { });
                         event.preventDefault();
@@ -1295,8 +1286,13 @@ alert('No File Loaded or Corrupted File');
                     connection.on("ReceiveMessage", async message => {
 
                     });
+connection.on("GetMyConnectionId",async connectionid=>{
+    localStorage.setItem("ConnectionId", connectionid);
 
-                    connection.start();
+})
+                    connection.start().then(async ()=>{
+                        connection.invoke("GetConnectionId");
+                    });
 
                     //  ////alert("Connected");
 
