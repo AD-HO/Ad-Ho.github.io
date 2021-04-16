@@ -1288,6 +1288,23 @@ alert('No File Loaded or Corrupted File');
                     });
 connection.on("GetMyConnectionId",async connectionid=>{
     localStorage.setItem("ConnectionId", connectionid);
+    barChartData.datasets[0].data = [];
+                        barChartData.datasets[1].data = [];
+                        barChartData.labels = [0];
+
+                        config.data.datasets[0].data = [{ x: 0, y: 0 }];
+
+                        config.data.datasets[1].data = [{ x: 0, y: 0 }];
+                        config.data.datasets[2].data = [{ x: 0, y: 0 }];
+                        config.data.datasets[3].data = [{ x: 0, y: 0 }];
+                        config.data.labels = [0];
+                        config2.data.labels = [0];
+                        config2.data.datasets[1].data = [{ x: 0, y: 0 }];
+                        config2.data.datasets[0].data = [{ x: 0, y: 0 }];
+                        window.myBar.update();
+
+                        window.myLine.update();
+                        window.myLine2.update();
     connection.invoke("ImportFile","uf50-01");
                         
 
