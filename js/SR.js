@@ -28,7 +28,8 @@ var app = new Vue({
             img: null,
             value: 0,
             item: {
-                image: null,
+                SR: null,
+                BIC:null,
                 imageUrl: null
             },
             file: null,
@@ -47,9 +48,31 @@ var app = new Vue({
                    // //alert('Bonjour Morray');
                 },
                 AffIm: function (im) {
-                    this.item.image = im
+                    document.getElementById("srImg").src = im;
+                    
+                    document.getElementById("srLink").href=im;
+                },
+                AffBic: function (im) {
+                    document.getElementById("bicImg").src = im
+
 
                 },
+                showSr: function () {
+var iframe = "<iframe width='100%' height='100%' src='" + document.getElementById("srImg").src + "'></iframe>"
+var x = window.open();
+x.document.open();
+x.document.write(iframe);
+x.document.close();
+                    
+                },
+                showBic: function () {
+                    var iframe = "<iframe width='100%' height='100%' src='" + document.getElementById("bicImg").src + "'></iframe>"
+                    var x = window.open();
+                    x.document.open();
+                    x.document.write(iframe);
+                    x.document.close();
+                                        
+                                    },
                 AffVal: function (v) {
                     this.value = v;
 
@@ -76,6 +99,15 @@ connection.on("ReceiveIm", m => {
     //alert("iddddddddd");
     app.AffIm("data:image/png;base64," + m);
     app.AffVal(100);
+
+    imageZoom2("srImg","bicImg", "myresult1","myresult2");
+
+
+});
+connection.on("ReceiveBIC", m => {
+    //alert("iddddddddd");
+    app.AffBic("data:image/png;base64," + m);
+    app.AffVal(99);
 
 
 
