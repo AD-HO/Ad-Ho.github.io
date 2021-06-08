@@ -68,6 +68,7 @@ function clearCanvas() {
   }
 }
 
+
 function drawLine(fromX, fromY, toX, toY) {
   // Draws a line from (fromX, fromY) to (toX, toY).
   ctx.beginPath();

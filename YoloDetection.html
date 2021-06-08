@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title>ADHO</title>
+</head>
+<body>
+    <div id="app">
+        <v-app>
+          
+            <v-content>
+
+
+                <v-toolbar dark
+                           src="BackgroundR.png">
+
+
+                    <v-toolbar-title href="#">        <v-icon>mdi-github</v-icon>        Ad-Ho </v-toolbar-title>
+
+                    <v-row>
+
+
+                        <v-tabs v-model="tab"
+                                background-color="transparent"
+                                centered
+                                icons>
+
+
+                            <v-tab v-for="item in items"
+                                   :key="item.tab"
+                                   href="#"
+                                   link>
+
+                                <v-icon>{{item.icon}}</v-icon>
+
+                            </v-tab>
+
+
+                        </v-tabs>
+
+
+                    </v-row>
+
+
+                </v-toolbar>
+                
+                <div v-if="value > 0">
+
+                    <v-progress-linear :value="value"
+                                       color="blue darken-4"></v-progress-linear>
+                    <h5 class="text-center black--text"> {{value}} %</h5>
+                </div>
+
+                <v-tabs-items v-model="tab">
+
+
+                    <!--AAAAAAAAAAAAAAAAAAAAA-->
+                    <v-tab-item>
+                        <v-row align="center">
+
+
+
+                            <v-col class="text-center white--text" cols="12">
+                                <h1 class="display-1 font-weight-thin mb-4">Adli Houssem</h1>
+
+                                <!--  <v-btn text large color="white" v-on:click="Doit" class="elevation-6">RESUME PDF</v-btn>
+                    -->
+                                <div id="preview">
+                                    <v-file-input v-model="file"
+                                                  chips
+                                                  accept="image/*"
+                                                  label="Image"
+                                                  @change="onFileChange()" />
+                                </div>
+                                <hr/>
+                                <img :src="item.image" >
+
+                            </v-col>
+                        </v-row>
+
+                    </v-tab-item>
+
+
+                </v-tabs-items>
+            </v-content>
+
+
+        </v-app>
+    </div>
+    <script src="js/signalr.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="js/Yolov5.js"></script>
+
+
+</body>
+</html>
