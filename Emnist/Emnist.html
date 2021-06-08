@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <title>EMNIST-Recognizer</title>
+  </head>
+
+  <body>
+    <div class="card elevation">
+      <canvas
+        class="canvas elevation"
+        id="canvas"
+        width="280"
+        height="280"
+      ></canvas>
+      <div class="button" id="clear-button">CLEAR</div>
+
+    </div>
+
+
+      <div class="predictions">
+        <div class="prediction-col" id="prediction-0">
+          <div class="prediction-bar-container">
+            <div class="prediction-bar"></div>
+          </div>
+          <h1 id="result" class="prediction-number"></h1>
+        </div>
+
+      </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
