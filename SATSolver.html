@@ -888,7 +888,7 @@
                     var edges
                     var nodes;
                     const connection = new signalR.HubConnectionBuilder()
-                        .withUrl("http://serverside-001-site1.gtempurl.com/HubBridge")
+                        .withUrl("http://evolutionary-001-site1.btempurl.com/hubbridge")
                         .configureLogging(signalR.LogLevel.Information)
                         .build();
 
@@ -1189,7 +1189,7 @@ alert('No File Loaded or Corrupted File');
 
                         stopit = true;
                         $.ajax({
-                            url: 'http://serverside-001-site1.gtempurl.com/Home/StopTask?id='+localStorage.getItem('ConnectionId'),
+                            url: 'http://evolutionary-001-site1.btempurl.com/hubbridge/Home/StopTask?id='+localStorage.getItem('ConnectionId'),
                             type: 'POST'
                         }).done(function (result) { });
                         event.preventDefault();
@@ -1313,7 +1313,7 @@ connection.on("GetMyConnectionId", connectionid=>{
 
 })
                     connection.start().then(async ()=>{
-                        connection.invoke("GetConnectionId");
+                       await connection.invoke("GetConnectionId");
                     });
 
                     //  ////alert("Connected");
