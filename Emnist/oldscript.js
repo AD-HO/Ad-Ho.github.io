@@ -62,7 +62,7 @@ let lastY = 0;
 
 // Load our model.
 const sess = new onnx.InferenceSession();
-const loadingModelPromise = sess.loadModel("./model.onnx");
+const loadingModelPromise = sess.loadModel("./onnx_model.onnx");
 
 //const sess2 = new onnx.InferenceSession();
 //const loadingModelPromise2 = sess2.loadModel("./MobileNet.onnx");
@@ -95,6 +95,7 @@ function drawLine(fromX, fromY, toX, toY) {
 }
 
 async function updatePredictions() {
+  /*
   // Get the predictions for the canvas data.
   const imgData = ctx.getImageData(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   const input = new onnx.Tensor(new Float32Array(imgData.data), "float32");
@@ -108,8 +109,28 @@ async function updatePredictions() {
   const maxPrediction = Math.max(...predictions);
   console.log(String.fromCharCode(classes[predictions.indexOf(maxPrediction)]))
 document.getElementById("result").innerHTML=String.fromCharCode(classes[predictions.indexOf(maxPrediction)])
+*/
+var s=canvas.toDataURL("image/jpeg").split(';base64,')[1]
+connection.invoke("GetIm", s, "test");
 
 }
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("http://localhost:5000/HubBridge")
+    .build();
+
+async function start() {
+    try {
+        await connection.start();
+    } catch (err) {
+        console.log(err);
+        setTimeout(() => start(), 5000);
+    }
+};
+connection.on("ReceiveMessage", m => {
+
+    alert(m);
+
+});
 
 function canvasMouseDown(event) {
   isMouseDown = true;
@@ -169,6 +190,7 @@ loadingModelPromise.then(async () => {
   ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   ctx.fillText("Draw a number here!", CANVAS_SIZE / 2, CANVAS_SIZE / 2); 
 
-  await updatePredictions();
+  //await updatePredictions();
+  await connection.start();
   alert("done")
 })
