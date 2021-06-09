@@ -3,6 +3,7 @@ const CANVAS_SCALE = 0.5;
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+
 const clearButton = document.getElementById("clear-button");
 const classes={
   "0" : "48",
@@ -61,10 +62,10 @@ let lastY = 0;
 
 // Load our model.
 const sess = new onnx.InferenceSession();
-const loadingModelPromise = sess.loadModel("./ByPasser.onnx");
+const loadingModelPromise = sess.loadModel("./onnx_model.onnx");
 
-const sess2 = new onnx.InferenceSession();
-const loadingModelPromise2 = sess2.loadModel("./MobileNet.onnx");
+//const sess2 = new onnx.InferenceSession();
+//const loadingModelPromise2 = sess2.loadModel("./MobileNet.onnx");
 
 // Add 'Draw a number here!' to the canvas.
 ctx.lineWidth = 28;
@@ -94,21 +95,42 @@ function drawLine(fromX, fromY, toX, toY) {
 }
 
 async function updatePredictions() {
+  /*
   // Get the predictions for the canvas data.
   const imgData = ctx.getImageData(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   const input = new onnx.Tensor(new Float32Array(imgData.data), "float32");
 
   const outputMap = await sess.run([input]);
   const outputTensor = outputMap.values().next().value;
-  const outputMap2 = await sess2.run([outputTensor]);
-  const outputTensor2 = outputMap2.values().next().value;
-  const predictions = outputTensor2.data;
-  console.log(predictions)
+  //const outputMap2 = await sess2.run([outputTensor]);
+  //const outputTensor2 = outputMap2.values().next().value;
+  const predictions = outputTensor.data.slice(0,47);
+  //console.log(predictions)
   const maxPrediction = Math.max(...predictions);
   console.log(String.fromCharCode(classes[predictions.indexOf(maxPrediction)]))
 document.getElementById("result").innerHTML=String.fromCharCode(classes[predictions.indexOf(maxPrediction)])
+*/
+var s=canvas.toDataURL("image/jpeg").split(';base64,')[1]
+connection.invoke("GetIm", s, "test");
 
 }
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("http://localhost:5000/HubBridge")
+    .build();
+
+async function start() {
+    try {
+        await connection.start();
+    } catch (err) {
+        console.log(err);
+        setTimeout(() => start(), 5000);
+    }
+};
+connection.on("ReceiveMessage", m => {
+
+    alert(m);
+
+});
 
 function canvasMouseDown(event) {
   isMouseDown = true;
@@ -156,7 +178,7 @@ function bodyMouseOut(event) {
   }
 }
 
-loadingModelPromise2.then(async () => {
+loadingModelPromise.then(async () => {
   canvas.addEventListener("mousedown", canvasMouseDown);
   canvas.addEventListener("mousemove", canvasMouseMove);
   canvas.addEventListener("click", updatePredictions);
@@ -166,7 +188,9 @@ loadingModelPromise2.then(async () => {
   clearButton.addEventListener("mousedown", clearCanvas);
 
   ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  ctx.fillText("Draw a number here!", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
-  await updatePredictions();
+  ctx.fillText("Draw a number here!", CANVAS_SIZE / 2, CANVAS_SIZE / 2); 
+
+  //await updatePredictions();
+  await connection.start();
   alert("done")
 })
