@@ -39,7 +39,19 @@
 	</style>
 </head>
 <body id="cp0" onbeforeunload="return myFunction()">
-   
+    <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#initmodal">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="initmodal" class="modal">
+    <div class="modal-content">
+      <h4>Waiting for server response</h4>
+      <div class="progress">
+        <div class="indeterminate"></div>
+    </div>    </div>
+    
+  </div>
+    
 
     <!-- Modal Structure -->
     <!-- Modal Structure -->
@@ -882,11 +894,14 @@
               
                 $('.tabs').tabs();
                 $('.modal').modal();
+                $('#initmodal').modal('open');
+
                 (async function () {
                     idd = 0;
                     from = 1;
                     var edges
                     var nodes;
+
                     const connection = new signalR.HubConnectionBuilder()
                         .withUrl("http://evolutionary-001-site1.btempurl.com/hubbridge")
                         .configureLogging(signalR.LogLevel.Information)
@@ -1313,8 +1328,12 @@ connection.on("GetMyConnectionId", connectionid=>{
 
 })
                     connection.start().then(async ()=>{
+                        $('#initmodal').modal('close');
+
                        await connection.invoke("GetConnectionId");
                     });
+
+
 
                     //  ////alert("Connected");
 
