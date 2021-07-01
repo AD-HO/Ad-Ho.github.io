@@ -3,10 +3,15 @@
         vuetify: new Vuetify(),
      
     data: {
+      
       drawer: null,
         items: [
           { title: 'Home', icon: 'mdi-dashboard' },
           { title: 'About', icon: 'mdi-question_answer' },
+        ],
+        itemsCaroussels: [
+          { title: 'Home', src: 'http://7-themes.com/data_images/out/36/6892516-black-abstract.jpg' },
+          { title: 'About', sec: 'http://7-themes.com/data_images/out/3/6777060-beautiful-winter-landscape.jpg' },
         ],
       items2: [        ['mdi-home','h'],
       ],
