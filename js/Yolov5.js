@@ -44,7 +44,6 @@ var app = new Vue({
                 Doit: function () {
                     // `this` fait référence à l'instance de Vue à l'intérieur de `methods`
                     connection.invoke("SendMessage", "HMDLH");
-                    alert('Bonjour Morray');
                 },
                 AffIm: function (im) {
                     this.item.image = im
@@ -60,7 +59,6 @@ var app = new Vue({
                     reader.readAsDataURL(this.file)
 
                     reader.onload = e => {
-                        alert(this.file.name);
                         // this.item.image = e.target.result
                         //alert(this.item.image)
                         connection.invoke("GetIm", e.target.result.substring(e.target.result.indexOf(",") + 1, e.target.result.length), this.file.name);
