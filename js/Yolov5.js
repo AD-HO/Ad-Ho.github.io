@@ -27,6 +27,8 @@ var app = new Vue({
             tab: null,
             img: null,
             value: 0,
+            dialog: false,
+
             item: {
                 image: null,
                 imageUrl: null
@@ -40,10 +42,15 @@ var app = new Vue({
             ],
         }
     },
+   async  mounted(){
+        this.dialog=true
+        await connection.start();
+        this.dialog=false
+
+    },
             methods: {
                 Doit: function () {
                     // `this` fait référence à l'instance de Vue à l'intérieur de `methods`
-                    connection.invoke("SendMessage", "HMDLH");
                 },
                 AffIm: function (im) {
                     this.item.image = im
@@ -83,4 +90,3 @@ connection.on("ReceiveVal", v => {
 
 
 });
-connection.start();

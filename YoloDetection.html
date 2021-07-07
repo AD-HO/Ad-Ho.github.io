@@ -11,9 +11,10 @@
 <body>
     <div id="app">
         <v-app>
+           
           
             <v-content>
-
+             
 
                 <v-toolbar dark
                            src="BackgroundR.png">
@@ -88,6 +89,30 @@
 
                 </v-tabs-items>
             </v-content>
+            <v-row justify="center">
+                
+            
+                <v-dialog
+                  v-model="dialog"
+                  max-width="290"
+                >
+                  <v-card>
+                    <v-card-title class="text-h5">
+Connecting to the server                    </v-card-title>
+            
+                    <v-card-text>
+                        <div>
+                      
+                            <v-progress-linear
+                              indeterminate
+                              color="cyan"
+                            ></v-progress-linear>
+                          </div>
+                                            </v-card-text>
+            
+                  </v-card>
+                </v-dialog>
+              </v-row>
 
 
         </v-app>

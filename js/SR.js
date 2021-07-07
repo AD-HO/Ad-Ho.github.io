@@ -26,6 +26,7 @@ var app = new Vue({
         return {
             tab: null,
             img: null,
+            dialog:false,
             value: 0,
             item: {
                 SR: null,
@@ -40,6 +41,12 @@ var app = new Vue({
 
             ],
         }
+    },
+    async  mounted(){
+        this.dialog=true
+        await connection.start();
+        this.dialog=false
+
     },
             methods: {
                 Doit: function () {
