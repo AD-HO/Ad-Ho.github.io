@@ -1,5 +1,5 @@
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://sronnx-001-site1.btempurl.com/HubBridge")
+    .withUrl("http://onnxsr-001-site1.itempurl.com/hubbridge")
     .build();
 
 async function start() {
