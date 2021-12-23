@@ -1,5 +1,5 @@
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://yoloserver-001-site1.itempurl.com/hubbridge")
+    .withUrl("http://yolocore-001-site1.htempurl.com/hubbridge")
     .build();
 
 async function start() {

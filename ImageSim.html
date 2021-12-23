@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title>Style-Transfer ADHO</title>
+    <style>
+    * {box-sizing: border-box;}
+
+    .img-zoom-container {
+      position: relative;
+    }
+    
+    .img-zoom-lens {
+      position: absolute;
+      /*set the size of the lens:*/
+      width: 60px;
+      height: 60px;
+    }
+    
+    .img-zoom-result {
+      border: 1px solid #d4d4d4;
+      /*set the size of the result div:*/
+      width: 280px;
+      height: 320px;
+    }
+    </style>
+      
+</head>
+<body>
+    <div id="app">
+        <v-app>
+           
+          
+            <v-content>
+             
+
+                <v-toolbar dark
+                           src="BackgroundR.png">
+
+
+                           <a  style="text-decoration: none;" class="white--text" target="_blank" href="https://github.com/AD-HO/">  
+                            <v-toolbar-title  href="#" style="text-decoration: none;">      <v-icon x-large>mdi-github</v-icon>        Ad-Ho </v-toolbar-title>
+                      </a>
+                    <v-row>
+
+
+                        <v-tabs v-model="tab"
+                                background-color="transparent"
+                                centered
+                                icons>
+
+
+                            <v-tab v-for="item in items"
+                                   :key="item.tab"
+                                   href="#"
+                                   link>
+
+                                <v-icon>{{item.icon}}</v-icon>
+
+                            </v-tab>
+
+
+                        </v-tabs>
+
+
+                    </v-row>
+
+
+                </v-toolbar>
+                <h3 class="text-center">Image Similarity</h3>
+                <div v-if="value > 0">
+
+                    <v-progress-linear :value="value"
+                                       color="blue darken-4"></v-progress-linear>
+                    <h5 class="text-center black--text"> {{value}} %</h5>
+                </div>
+
+                <v-tabs-items v-model="tab">
+
+
+                    <!--AAAAAAAAAAAAAAAAAAAAA-->
+                    <v-tab-item>
+                        <v-row align="center">
+
+
+
+                            <v-col class="text-center white--text" cols="12">
+                                <h1 class="display-1 font-weight-thin mb-4">Adli Houssem</h1>
+
+                                <!--  <v-btn text large color="white" v-on:click="Doit" class="elevation-6">RESUME PDF</v-btn>
+                    -->
+                    <v-row>
+                    <v-col cols="6">
+                                <div id="preview">
+                                    <v-file-input v-model="file"
+                                                  chips
+                                                  accept="image/*"
+                                                  label="Image"
+                                                  @change="onFileChange()" />
+                                </div>
+                                <img :src="item.image" >
+                            </v-col>
+                            <v-col cols="6">
+                                <div id="preview">
+                                    <v-file-input v-model="file"
+                                                  chips
+                                                  accept="image/*"
+                                                  label="Image"
+                                                  @change="onFileChange()" />
+                                </div>
+                                <img :src="item.image" >
+                            </v-col>
+                        </v-row>
+                        <v-btn
+                        depressed
+                        color="primary"
+                      >
+                        Start
+                      </v-btn>
+                        <hr/>
+
+                            </v-col>
+                        </v-row>
+                        <v-row justify="center">
+<v-col cols="3">
+                        <h1>PSNR : </h1>
+                        <h1>SSIM : </h1>
+                        </v-row>
+                    </v-col>
+                    </v-tab-item>
+
+
+                </v-tabs-items>
+            </v-content>
+            <v-row justify="center">
+                
+            
+           
+              </v-row>
+
+              <h2>Hello OpenCV.js</h2>
+              <div>
+                <div class="inputoutput">
+                  <img id="imageSrc" alt="No Image" />
+                  <div class="caption">imageSrc <input type="file" id="fileInput" name="file" /></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="inputoutput2">
+                  <img id="imageSrc2" alt="No Image" />
+                  <div class="caption">imageSrc <input type="file" id="fileInput2" name="file" /></div>
+                </div>
+              </div>
+
+        </v-app>
+        <canvas id="outputCanvas"></canvas>
+        <canvas id="outputCanvas2"></canvas>
+
+    </div>
+    <script type="text/javascript">
+      /*  let imgElement = document.getElementById("imageSrc")
+        let inputElement = document.getElementById("fileInput");
+        alert("hiha")
+        inputElement.addEventListener("change", (e) => {
+          imgElement.src = URL.createObjectURL(e.target.files[0]);
+        }, false);*/
+        </script>
+    <script src="js/signalr.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+        
+    <script src="js/opencv.js" type="text/javascript"></script>
+    <script src="js/Sim.js"></script>
+    <script src="https://unpkg.com/ssim.js@{{version}}/dist/ssim.web.js"></script>
+ 
+
+      
+</body>
+
+</html>
