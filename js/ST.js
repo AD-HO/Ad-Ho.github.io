@@ -1,5 +1,5 @@
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://localhost:5000/hubbridge")
+    .withUrl("http://stylecore-001-site1.itempurl.com/hubbridge")
     .build();
 
 async function start() {
@@ -36,7 +36,6 @@ var app = new Vue({
                 imageUrl: null
             },
             file: null,
-            radioGroup:null,
             image: null,
 
             items: [
@@ -49,9 +48,13 @@ var app = new Vue({
         this.dialog=true
         await connection.start();
         this.dialog=false
+        this.$refs.defaultradio.$el.click()
 
     },
             methods: {
+                trigger () {
+                    this.$refs.defaultradio.click()
+                },
                 Doit: function () {
                     // `this` fait référence à l'instance de Vue à l'intérieur de `methods`
                   //  connection.invoke("GetIm", );
@@ -77,7 +80,6 @@ var app = new Vue({
                        
                         
                         this.item.image = e.target.result
-                alert(this.radioGroup)
                          connection.invoke("Transform", e.target.result.substring(e.target.result.indexOf(",") + 1, e.target.result.length), this.file.name,this.radioGroup);
 
     }

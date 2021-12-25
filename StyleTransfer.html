@@ -49,6 +49,8 @@ Style Transfer
 
 
                 </v-toolbar>
+                <h4 class="black--text"> Due to lack of processing power, please enter an Image with a size less than (700,700) </h4>
+
                 <div v-if="value > 0">
 
                     <v-progress-linear :value="value"
@@ -56,11 +58,9 @@ Style Transfer
                     <h5 class="text-center black--text"> {{value}} %</h5>
                 </div>
 
-                <v-tabs-items v-model="tab">
 
 
                     <!--AAAAAAAAAAAAAAAAAAAAA-->
-                    <v-tab-item>
                         <v-row justify="center">
 
 
@@ -98,6 +98,8 @@ Style Transfer
                                     
                                 label="Mosaic"
                                 value="1"
+                                checked="checked"
+ref="defaultradio"
                               >
                             </v-radio>
                             </v-col>
@@ -146,10 +148,7 @@ Style Transfer
                             </v-col>
                         </v-row>
 
-                    </v-tab-item>
-
-
-                </v-tabs-items>
+                   
             </v-content>
             <v-row justify="center">
                 
