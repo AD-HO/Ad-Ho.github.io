@@ -1,5 +1,5 @@
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://stylecore-001-site1.itempurl.com/hubbridge")
+    .withUrl("http://localhost:5000/hubbridge")
     .build();
 
 async function start() {
