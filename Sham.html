@@ -193,7 +193,7 @@
     var elt8 = document.getElementById("image8Active");
 
 
-  
+
     var image1_data = {
         "id": "image1Active",
         "X": getPos(elt1)['X'],
@@ -208,6 +208,7 @@
         'top_left': "./assets/top-left.png",
         'bottom_right': "./assets/bottom-right.png",
         'bottom_left': "./assets/bottom-left.png",
+        'center': "./assets/straight.png",
     }
 
     var image2_data = {
@@ -224,6 +225,7 @@
         'top_left': "./assets/top-left.png",
         'bottom_right': "./assets/bottom-right.png",
         'bottom_left': "./assets/bottom-left.png",
+        'center': "./assets/straight.png",
     }
     var image3_data = {
         "id": "image3Active",
@@ -239,6 +241,7 @@
         'top_left': "./assets/top-left.png",
         'bottom_right': "./assets/bottom-right.png",
         'bottom_left': "./assets/bottom-left.png",
+        'center': "./assets/straight.png",
     }
 
     var image4_data = {
@@ -255,6 +258,7 @@
         'top_left': "./assets/top-left.png",
         'bottom_right': "./assets/bottom-right.png",
         'bottom_left': "./assets/bottom-left.png",
+        'center': "./assets/straight.png",
     }
 
     var image5_data = {
@@ -271,6 +275,7 @@
         'top_left': "./assets/top-left.png",
         'bottom_right': "./assets/bottom-right.png",
         'bottom_left': "./assets/bottom-left.png",
+        'center': "./assets/straight.png",
     }
 
     var image6_data = {
@@ -287,6 +292,7 @@
         'top_left': "./assets/top-left.png",
         'bottom_right': "./assets/bottom-right.png",
         'bottom_left': "./assets/bottom-left.png",
+        'center': "./assets/straight.png",
     }
     var image7_data = {
         "id": "image7Active",
@@ -302,6 +308,7 @@
         'top_left': "./assets/top-left.png",
         'bottom_right': "./assets/bottom-right.png",
         'bottom_left': "./assets/bottom-left.png",
+        'center': "./assets/straight.png",
     }
     var image8_data = {
         "id": "image8Active",
@@ -317,13 +324,14 @@
         'top_left': "./assets/top-left.png",
         'bottom_right': "./assets/bottom-right.png",
         'bottom_left': "./assets/bottom-left.png",
+        'center': "./assets/straight.png",
     }
 
-    function UpdatePosition(image_data,elt) {
+    function UpdatePosition(image_data, elt) {
 
         image_data["height"] = elt.offsetHeight
         image_data["width"] = elt.offsetWidth
-        
+
         image_data['X'] = getPos(elt)['x']//+image_data["widht"]
         image_data['Y'] = getPos(elt)['y']//-image_data["height"]
 
@@ -337,6 +345,7 @@
         var left = CURSOR_X < (image_data['X'])
         var bottom = CURSOR_Y > (image_data['Y'] + image_data.height)
         var top = CURSOR_Y < (image_data['Y'])
+        var center = (CURSOR_X > image_data['X']) && CURSOR_X < (image_data['X'] + image_data.width) && (CURSOR_Y > (image_data['Y'])) && (CURSOR_Y < (image_data['Y'] + image_data.height))
         var image_elt = document.getElementById(image_data['id'])
         var decided = false
         if (right && top && !decided)//right
@@ -346,24 +355,21 @@
             decided = true;
 
         }
-        if (left && top && !decided)
-        {
+        if (left && top && !decided) {
             console.log("Left Top")
             image_elt.src = image_data['top_left']
             decided = true;
 
 
         }
-        if (right && bottom && !decided)
-        {
+        if (right && bottom && !decided) {
             console.log("right Bottom")
             image_elt.src = image_data['bottom_right']
 
             decided = true;
 
         }
-        if (left && bottom && !decided)
-        {
+        if (left && bottom && !decided) {
             image_elt.src = image_data['bottom_left']
 
             console.log("Left bottom")
@@ -380,14 +386,14 @@
             console.log("bottom")
             image_elt.src = image_data['bottom']
             decided = true;
-        } 
+        }
         if (left && !decided) {
             console.log("left")
             image_elt.src = image_data['left']
             decided = true;
 
 
-        } 
+        }
         if (right && !decided) {
             console.log("right")
             image_elt.src = image_data['right']
@@ -395,7 +401,13 @@
 
 
         }
+        if (center && !decided) {
+            console.log("center")
+            image_elt.src = image_data['center']
+            decided = true;
 
+
+        }
 
 
 
@@ -413,14 +425,14 @@
     function logPosition(e) {
         CURSOR_X = e.clientX
         CURSOR_Y = e.clientY
-        UpdatePosition(image1_data,elt1)
-        UpdatePosition(image2_data,elt2)
-        UpdatePosition(image3_data,elt3)
-        UpdatePosition(image4_data,elt4)
-        UpdatePosition(image5_data,elt5)
-        UpdatePosition(image6_data,elt6)
-        UpdatePosition(image7_data,elt7)
-        UpdatePosition(image8_data,elt8)
+        UpdatePosition(image1_data, elt1)
+        UpdatePosition(image2_data, elt2)
+        UpdatePosition(image3_data, elt3)
+        UpdatePosition(image4_data, elt4)
+        UpdatePosition(image5_data, elt5)
+        UpdatePosition(image6_data, elt6)
+        UpdatePosition(image7_data, elt7)
+        UpdatePosition(image8_data, elt8)
         UpdateImage(image1_data)
         UpdateImage(image2_data)
         UpdateImage(image3_data)
@@ -431,8 +443,8 @@
         UpdateImage(image8_data)
 
         //console.log(calculAngle1())
-        console.log("X=", CURSOR_X," Y=", CURSOR_Y)
-         console.log("XImage=", image8_data['X']," YImage=", image8_data['Y'])
+        console.log("X=", CURSOR_X, " Y=", CURSOR_Y)
+        console.log("XImage=", image8_data['X'], " YImage=", image8_data['Y'])
 
 
     }
@@ -445,8 +457,6 @@
     }
     logPosition()
 </script>
-
-
       
 </body>
 
