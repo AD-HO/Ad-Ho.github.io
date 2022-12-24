@@ -2,10 +2,9 @@
 <html>
 
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <link href="css/vuetify.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="js\style.css">
 
@@ -24,8 +23,7 @@
 
         <v-toolbar dark dense flat style="          background-image: linear-gradient(to left, rgb(0, 0, 0), #08212e);
    ">
-          <a style="text-decoration: none;" class="white--text" target="_blank" href="https://github.com/AD-HO/">
-          </a>
+
           <v-row>
 
 
@@ -34,7 +32,7 @@
 
               <v-tab v-for="item in items" :key="item.tab" href="#" link>
 
-                <v-icon>{{item.icon}}</v-icon>
+                <v-icon large>{{item.icon}}</v-icon>
 
               </v-tab>
 
@@ -57,7 +55,21 @@
           <v-row align="center">
             <v-col class="text-center white--text " cols="12">
               <h1 class="display-1 font-weight-thin ">Houssem Adli</h1>
+              <a style="text-decoration: none;" class="white--text" target="_blank" href="https://github.com/AD-HO/">
+                <v-icon x-large color="white">
+                  mdi-linkedin
+                </v-icon>
+                AD-HO
+              </a>
+              <v-icon x-large color="white">
+                mdi-drag-vertical-variant
+              </v-icon>
+              <a style="text-decoration: none;" class="white--text" target="_blank" href="https://github.com/AD-HO/">
 
+                AD-HO <v-icon x-large color="white">
+                  mdi-github
+                </v-icon>
+              </a>
 
             </v-col>
           </v-row>
@@ -92,13 +104,210 @@
             <v-row>
 
               <v-col class="text-center white--text" cols="12">
-                <h1 class="display-1 font-weight-thin mb-4">AI Projects</h1>
+                <h1 class="display-1 font-weight-thin mb-4">Projects</h1>
 
 
               </v-col>
-              
-         
-             </v-row>
+              <v-col class="text-left white--text" md="4" cols="12">
+                <v-card class="mx-auto cardd" max-width="400">
+                  <v-img class="white--text align-end" height="200px" src="images/ai.jpg">
+                    <v-card-title>SAT Solver</v-card-title>
+                  </v-img>
+
+
+                  <v-card-text class="text--primary">
+                    <div> <v-chip color="blue-grey darken-4" text-color="white">
+                        Satisfaction Problem
+                      </v-chip>
+                      <v-chip color="blue-grey darken-4" text-color="white">
+                        Meta-Heuristics
+                      </v-chip>
+                    </div>
+                  </v-card-text>
+
+                  <v-card-actions>
+
+                    <!-- <v-btn
+                    color="orange"
+                    text
+                    target="_blank"
+                    href="SATSolver.html"
+                  >
+                    Explore
+                  </v-btn> -->
+                    <v-btn color="orange" text target="_blank"
+                      href="https://drive.google.com/file/d/1Vf61JsqhlqdBa4XHON14abyKBbfMgRu_/view?usp=sharing">
+                      Demo
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+
+
+              <v-col class="text-left white--text" md="4" cols="12">
+                <v-card class="mx-auto cardd" max-width="400">
+                  <v-img class="white--text align-end" height="200px" src="images/nlp.jpg">
+                    <v-card-title>Arabic POS-TAGGER</v-card-title>
+                  </v-img>
+
+
+                  <v-card-text class="text--primary">
+
+                    <div>
+                      <v-chip color="blue-grey darken-4" text-color="white">
+                        Arabic
+                      </v-chip>
+                      <v-chip color="blue-grey darken-4" text-color="white">
+                        POS-Tagging
+                      </v-chip>
+                      <v-chip color="blue-grey darken-4" text-color="white">
+                        NTLK
+                      </v-chip>
+                    </div>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-btn color="orange" text target="_blank" href="https://github.com/mounir4023/MSA_POS_Tagger">
+                      Github
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+
+
+              <v-col class="text-left white--text" md="4" cols="12">
+                <v-card class="mx-auto cardd" max-width="400">
+                  <v-img class="white--text align-end" height="200px" src="images/cv.jpg">
+                    <v-card-title>Super-Resolution</v-card-title>
+                  </v-img>
+
+
+                  <v-card-text class="text--primary">
+
+                    <div>
+                      <v-chip color="blue-grey darken-4" text-color="white"> Super-Resolution
+                      </v-chip>
+                      <v-chip color="blue-grey darken-4" text-color="white">
+                        ONNX Runtime
+                      </v-chip>
+                    </div>
+                  </v-card-text>
+
+                  <v-card-actions>
+                
+                    <v-btn color="orange" text target="_blank"
+                      href="https://drive.google.com/file/d/1XloZSYAYmEXQJb7EKAAXkg0ZJdZObXCv/view?usp=share_link">
+                      Demo
+                    </v-btn>
+                    <v-btn color="orange" text target="_blank" href="https://github.com/AD-HO/SR-ONNX">
+                      Github
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+
+              <v-col class="text-left white--text" md="4" cols="12">
+                <v-card class="mx-auto cardd" max-width="400">
+                  <v-img class="white--text align-end" height="200px"
+                    src="images/obj.jpg">
+                    <v-card-title>Object Detection</v-card-title>
+                  </v-img>
+
+
+                  <v-card-text class="text--primary">
+
+                    <div>
+                      <v-chip color="blue-grey darken-4" text-color="white"> Yolov5
+                      </v-chip>
+
+                          <v-chip color="blue-grey darken-4" text-color="white">
+                            ML.NET
+                          </v-chip>
+
+                          <v-chip color="blue-grey darken-4" text-color="white">
+                            ONNX Runtime
+                          </v-chip>
+                    </div>
+                  </v-card-text>
+
+                  <v-card-actions>
+
+                  
+                    <v-btn color="orange" text target="_blank"
+                      href="https://drive.google.com/file/d/1pYIe0kT4yeJiFIOEaLLJeUQrduvpVswN/view">
+                      Demo
+                    </v-btn>
+                    <v-btn color="orange" text target="_blank" href="https://github.com/AD-HO/YOLOv5-ML.NET">
+                      Github
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+              <v-col class="text-left white--text" md="4"
+      cols="12">
+        <v-card
+        class="mx-auto cardd"
+        max-width="400"
+      >
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://hailo.ai/wp-content/uploads/2021/02/BLOG-POST-894X400PX.jpg"
+        >
+          <v-card-title>Multi-Person Tracking</v-card-title>
+        </v-img>
+    
+    
+        <v-card-text class="text--primary">
+    
+          <div>
+            <v-chip
+            
+            color="blue-grey darken-4"
+            text-color="white"
+            > 
+            Person Re-Idef
+            </v-chip>
+
+       
+
+            <v-chip
+            
+            color="blue-grey darken-4"
+            text-color="white"
+            > 
+            Real-Time Tracking
+            </v-chip>
+
+           
+            
+            
+            
+          </div>
+        </v-card-text>
+    
+        <v-card-actions>
+          
+        <v-btn
+        color="orange"
+        text
+        target="_blank"
+        href="https://drive.google.com/file/d/1JgGmQO98ZKaLJAruBzdYIcv8YFPPJzct/view?usp=share_link"
+      >
+        Demo
+      </v-btn>
+      <!-- <v-btn
+      color="orange"
+      text
+      target="_blank"
+      href="https://github.com/AD-HO/"
+    >
+      Github
+    </v-btn> -->
+        </v-card-actions>
+      </v-card>
+      </v-col>
+            </v-row>
           </v-col>
         </v-row>
 
@@ -115,8 +324,8 @@
 
   <script src="js\script-anime.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
+  <script src="js/vue.js"></script>
+  <script src="js/vuetify.min.js"></script>
   <script>
     new Vue({
       el: '#app',
