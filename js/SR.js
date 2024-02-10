@@ -1,5 +1,5 @@
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://srcore-001-site1.etempurl.com/hubbridge")
+    .withUrl("http://localhost:5003/hubbridge")
     .build();
 
 async function start() {
